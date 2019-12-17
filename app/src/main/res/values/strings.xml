@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">EDelegue</string>
+    <string name="app_name">E-Delegue</string>
+    <string name="textfield_label">email</string>
+    <string name="name_app">E-delegue</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">mot de passe</string>
+    <string name="etudiant">Etudiant</string>
+    <string name="enseignant">Enseignant</string>
+    <string name="connexion">Connexion</string>
+    <string name="commencer_maintenant">commencer maintenant</string>
+    <string name="logo">logo</string>
+    <string name="inscription">Inscription</string>
+    <string name="conf_hint_password">Confermer le mot de pass</string>
+    <string name="username">Nom d\'utilisaeur</string>
 </resources>

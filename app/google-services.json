@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "862712001067",
+    "firebase_url": "https://e-delegue.firebaseio.com",
+    "project_id": "e-delegue",
+    "storage_bucket": "e-delegue.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862712001067:android:3aa8e94e5139c75969706e",
+        "android_client_info": {
+          "package_name": "android.example.edelegue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862712001067-te8pvftm6n4lt92v4mj09s07gn9mkide.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "android.example.edelegue",
+            "certificate_hash": "76fc25ec8bd9807478c95dce795ebda7ed2d6cbd"
+          }
+        },
+        {
+          "client_id": "862712001067-rs2s2q3iofggb63jep951i2dijingr4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH38mQDGK3YpRXL09HNjn4wib16v-n2-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862712001067-rs2s2q3iofggb63jep951i2dijingr4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
