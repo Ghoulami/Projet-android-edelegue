@@ -12,4 +12,5 @@
     <string name="inscription">Inscription</string>
     <string name="conf_hint_password">Confermer le mot de pass</string>
     <string name="username">Nom d\'utilisaeur</string>
+    <string name="registration_success">Registered Successfully</string>
 </resources>

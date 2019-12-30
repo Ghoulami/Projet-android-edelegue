@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/loginPageBackgroundColor"
-        tools:context=".LoginFragment">
+        tools:context=".LoginFragment"
+        tools:layout_editor_absoluteX="-26dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +27,7 @@
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginBottom="16dp"
                 android:contentDescription="@string/logo"
                 android:outlineAmbientShadowColor="@color/colorPrimary"
@@ -65,7 +67,7 @@
                     android:id="@+id/password_register_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -79,7 +81,7 @@
                     android:id="@+id/Conf_password_register_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -96,25 +98,27 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
-                android:id="@+id/GB_etudiant"
-                android:orientation="horizontal"
+                android:id="@+id/RG_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checkedButton="@+id/RB_etudiant"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:checkedButton="@+id/RB_etudiant"
+                android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/RB_etudiant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/etudiant"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    android:text="@string/etudiant" />
+
                 <RadioButton
                     android:id="@+id/RB_enseigant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/enseignant"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:text="@string/enseignant" />
             </RadioGroup>
 
 
@@ -126,8 +130,20 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="60dp"
                 android:onClick="inscription"
-                android:text="@string/commencer_maintenant"/>
+                android:text="@string/commencer_maintenant" />
         </LinearLayout>
+
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

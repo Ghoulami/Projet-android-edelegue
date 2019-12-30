@@ -25,8 +25,8 @@
                 android:layout_width="80dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="48dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="26dp"
                 android:contentDescription="@string/logo"
                 app:srcCompat="@drawable/fp_logo" />
 
@@ -34,18 +34,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="80dp"
+                android:layout_marginBottom="40dp"
                 android:text="@string/name_app"
                 android:textAllCaps="true"
                 android:textSize="24sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_signIn_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:hint="@string/hint_email">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_signIn_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -53,32 +55,35 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_text_input"
+                android:id="@+id/password_signIn_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:hint="@string/hint_password">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_edit_text"
+                    android:id="@+id/password_signIn_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <RadioGroup
+                android:id="@+id/RG_singIn"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checkedButton="@+id/RB_etudiant"
+                android:checkedButton="@+id/RB_singIn_etudiant"
                 android:layout_gravity="center">
                 <RadioButton
-                    android:id="@+id/RB_etudiant"
+                    android:id="@+id/RB_singIn_etudiant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/etudiant"
                     android:padding="10dp"/>
                 <RadioButton
-                    android:id="@+id/RB_enseigant"
+                    android:id="@+id/RB_singIn_enseigant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/enseignant"
@@ -92,6 +97,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="60dp"
                 android:layout_height="wrap_content"
+                android:onClick="connexion"
                 android:gravity="center"
                 android:text="@string/connexion"/>
 
@@ -105,6 +111,18 @@
                 android:layout_marginTop="60dp"
                 android:text="@string/commencer_maintenant"/>
         </LinearLayout>
+
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
