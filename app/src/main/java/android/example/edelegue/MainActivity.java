@@ -2,9 +2,9 @@ package android.example.edelegue;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -12,38 +12,43 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
     private TextInputEditText mEmailEditText;
     private TextInputEditText mPasswordEditText;
     private RadioGroup mRadioButton;
-    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null){
+            authCheck(currentUser);
+        }else{
+            setContentView(R.layout.activity_main);
+        }
 
         mEmailEditText = findViewById(R.id.email_signIn_edit_text);
         mPasswordEditText = findViewById(R.id.password_signIn_edit_text);
         mRadioButton = findViewById(R.id.RG_singIn);
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
 
-        mAuth = FirebaseAuth.getInstance();
+
     }
+
 
     public void inscription(View view) {
         Intent myIntent = new Intent(MainActivity.this , Inscription.class);
         startActivity(myIntent);
     }
+
 
     public void connexion(View view) {
         String email = mEmailEditText.getText().toString().trim();
@@ -62,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     mPasswordEditText.setError("le mot de passe doit contenir au moins 8 caractères");
                     mPasswordEditText.requestFocus();
                 } else {
-                    signInUser( email , password, profile.getText().toString());
+                    Intent intentConnexion = new Intent(this, Connexion.class);
+                    intentConnexion.putExtra("email" , email);
+                    intentConnexion.putExtra("password" , password);
+                    intentConnexion.putExtra("profile" , profile.getText().toString());
+                    startActivity(intentConnexion);
+                    //signInUser( email , password, profile.getText().toString());
                 }
             }
         } else {
@@ -72,36 +82,76 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void signInUser(String email , String password , String profil){
+    public void authCheck(FirebaseUser currentUser){
 
-        progressBar.setVisibility(View.VISIBLE);
-
-        mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(MainActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
-                        Intent myIntent = new Intent(MainActivity.this , Acceuil.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(myIntent);
-                    } else {
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+        String uID = currentUser.getUid();
+        FirebaseFirestore.getInstance().collection("users").document(uID).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.getString("profile").equals("Etudiant")){
+                            Intent myIntent = new Intent(MainActivity.this , StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            myIntent.putExtra("email" , documentSnapshot.getString("Email"));
+                            myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
+                            myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
+                            startActivity(myIntent);
+                        }else{
+                            Intent myIntent = new Intent(MainActivity.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            myIntent.putExtra("email" , documentSnapshot.getString("Email"));
+                            myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
+                            myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
+                            startActivity(myIntent);
+                        }
                     }
-                }
-            });
-    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        Intent myIntent = new Intent(MainActivity.this , MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        Log.d("dddd" , e.getMessage());
+                        startActivity(myIntent);
+                    }
+                });
 
-    @Override
+
+    }
+    /*@Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            Intent myIntent = new Intent(MainActivity.this , Acceuil.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(myIntent);
+            String uID = currentUser.getUid();
+            FirebaseFirestore.getInstance().collection("users").document(uID).get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.getString("profile").equals("Etudiant")){
+                                Intent myIntent = new Intent(MainActivity.this , StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                myIntent.putExtra("email" , documentSnapshot.getString("Email"));
+                                myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
+                                myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
+                                startActivity(myIntent);
+                            }else{
+                                Intent myIntent = new Intent(MainActivity.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                myIntent.putExtra("email" , documentSnapshot.getString("Email"));
+                                myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
+                                myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
+                                startActivity(myIntent);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Intent myIntent = new Intent(MainActivity.this , MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Log.d("dddd" , e.getMessage());
+                            startActivity(myIntent);
+                        }
+                    });
         }
 
-    }
+    }*/
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Acceuil">
+    tools:context=".ProfesorActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,9 +35,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="80dp"
-                android:text="@string/name_app"
+                android:text="Profesor"
                 android:textAllCaps="true"
                 android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
