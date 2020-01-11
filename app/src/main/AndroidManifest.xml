@@ -14,11 +14,11 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".StudentActivity" />
@@ -26,14 +26,20 @@
         <activity android:name=".ProfesorActivity" />
 
         <activity android:name=".Connexion" />
-        <activity android:name=".posts_operations.Add_post">
+
+        <activity android:name=".ChatModule.MessageModel"
+            android:parentActivityName=".ProfesorActivity"/>
+
+        <activity android:name=".ChatModule.MessageActivity"
+            android:parentActivityName=".ChatModule.MessageModel"/>
+
+        <activity android:name=".posts_operations.Add_post"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatModule.MessageModel" />
-
 
 
     </application>
