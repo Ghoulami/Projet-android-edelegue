@@ -80,8 +80,7 @@
             android:background="@drawable/ic_action_name"
             android:id="@+id/btn_send"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 

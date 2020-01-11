@@ -15,11 +15,18 @@
         android:name="android.example.edelegue.ui.professor_fragments.PostsFragments"
         android:label="@string/posts"
         tools:layout="@layout/posts_fragments" />
-    <fragment
+
+    <!--<fragment
         android:id="@+id/nav_message"
         android:name="android.example.edelegue.ui.professor_fragments.MessagesFragment"
         android:label="@string/messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_messages" />-->
+
+    <activity
+        android:id="@+id/nav_message"
+        android:name="android.example.edelegue.ChatModule.MessageModel"
+        android:label="@string/messages"
+        tools:layout="@layout/activity_messages"/>
 
 
 </navigation>
