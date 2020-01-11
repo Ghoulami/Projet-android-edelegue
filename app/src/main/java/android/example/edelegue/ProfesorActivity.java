@@ -1,10 +1,13 @@
 package android.example.edelegue;
 
+import android.content.Intent;
+import android.example.edelegue.ChatModule.MessageModel;
 import android.example.edelegue.ui.professor_fragments.HomeFragment;
 import android.example.edelegue.ui.professor_fragments.MessagesFragment;
 import android.example.edelegue.ui.professor_fragments.PostsFragments;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;

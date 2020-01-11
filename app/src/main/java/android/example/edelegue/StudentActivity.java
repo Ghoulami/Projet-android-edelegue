@@ -15,6 +15,6 @@ public class StudentActivity extends AppCompatActivity {
 
         Intent in = getIntent();
         TextView T = findViewById(R.id.textView1);
-        T.setText("email : " + in.getStringExtra("email") + "\nUser Name : " + in.getStringExtra("User_Name") + "\nProfile : " +in.getStringExtra("profile") );
+        T.setText("email : " + in.getStringExtra("email") + "\nUser Name : " + in.getStringExtra("User_Name"));
     }
 }
