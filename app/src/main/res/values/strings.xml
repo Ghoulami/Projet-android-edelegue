@@ -32,4 +32,6 @@
     <string name="messages">Messages</string>
     <string name="hellot">Welcome professor</string>
     <string name="hello">Welcome Professor</string>
+    <string name="add_post">Ajouter un Post</string>
+    <string name="hint_post_title">Titre du post</string>
 </resources>
