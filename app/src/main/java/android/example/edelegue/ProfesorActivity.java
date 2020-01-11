@@ -91,7 +91,7 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
         int id = item.getItemId();
         switch(id){
             case R.id.nav_message:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_message,new MessagesFragment()).commit();
+                startActivity(new Intent(this, MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 break;
 
             case R.id.nav_home:
@@ -130,5 +130,11 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

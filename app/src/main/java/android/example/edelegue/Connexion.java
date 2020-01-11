@@ -57,13 +57,13 @@ public class Connexion extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                                             if (documentSnapshot.getString("profile").equals("Etudiant")){
-                                                Intent myIntent = new Intent(Connexion.this , MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                Intent myIntent = new Intent(Connexion.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 Toast.makeText(Connexion.this,  documentSnapshot.getString("User_Name"), Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                                 Toast.makeText(Connexion.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
                                                 startActivity(myIntent);
                                             }else{
-                                                Intent myIntent = new Intent(Connexion.this , MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                Intent myIntent = new Intent(Connexion.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 Toast.makeText(Connexion.this,  documentSnapshot.getString("User_Name"), Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                                 Toast.makeText(Connexion.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();

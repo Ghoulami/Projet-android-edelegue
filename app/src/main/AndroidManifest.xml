@@ -29,7 +29,8 @@
 
         <activity android:name=".Connexion" />
 
-        <activity android:name=".ChatModule.MessageModel" />
+        <activity android:name=".ChatModule.MessageModel"
+            android:parentActivityName=".ProfesorActivity"/>
 
         <activity android:name=".ChatModule.MessageActivity"
             android:parentActivityName=".ChatModule.MessageModel"/>
