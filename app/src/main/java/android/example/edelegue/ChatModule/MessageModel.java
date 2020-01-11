@@ -105,9 +105,10 @@ public class MessageModel extends AppCompatActivity {
         switch (item.getItemId()){
 
             case  R.id.logout:
+                status("offline");
                 FirebaseAuth.getInstance().signOut();
                 // change this code beacuse your app will crash
-                startActivity(new Intent(MessageModel.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 return true;
         }
 
