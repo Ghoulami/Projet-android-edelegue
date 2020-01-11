@@ -35,6 +35,10 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity android:name=".ChatModule.MessageModel" />
+
+        <activity android:name=".ChatModule.MessageActivity"/>
+
     </application>
 
 </manifest>

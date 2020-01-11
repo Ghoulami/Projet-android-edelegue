@@ -7,37 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="android.example.edelegue.ui.home.HomeFragment"
+        android:name="android.example.edelegue.ui.professor_fragments.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
-
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="android.example.edelegue.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/nav_myposts"
+        android:name="android.example.edelegue.ui.professor_fragments.PostsFragments"
+        android:label="@string/posts"
+        tools:layout="@layout/posts_fragments" />
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="android.example.edelegue.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_message"
+        android:name="android.example.edelegue.ui.professor_fragments.MessagesFragment"
+        android:label="@string/messages"
+        tools:layout="@layout/fragment_messages" />
 
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="android.example.edelegue.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
 
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="android.example.edelegue.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="android.example.edelegue.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
 </navigation>

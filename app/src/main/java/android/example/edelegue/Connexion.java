@@ -51,7 +51,7 @@ public class Connexion extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             uID = mAuth.getCurrentUser().getUid();
                             Toast.makeText(Connexion.this, uID, Toast.LENGTH_LONG).show();
-                            FirebaseFirestore.getInstance().collection("users").document(uID).get()
+                            FirebaseFirestore.getInstance().collection("Users").document(uID).get()
                                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -102,7 +102,7 @@ public class Connexion extends AppCompatActivity {
                                                 startActivity(myIntent);
                                             } else {
                                                 Toast.makeText(Connexion.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                                Intent myIntent = new Intent(Connexion.this , MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                Intent myIntent = new Intent(Connexion.this , MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 Log.d("dddd" , task.getException().getMessage());
                                                 startActivity(myIntent);
                                             }

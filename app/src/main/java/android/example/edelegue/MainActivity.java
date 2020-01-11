@@ -1,6 +1,7 @@
 package android.example.edelegue;
 
 import android.content.Intent;
+import android.example.edelegue.ChatModule.MessageModel;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -24,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private TextInputEditText mEmailEditText;
     private TextInputEditText mPasswordEditText;
-    private RadioGroup mRadioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         mEmailEditText = findViewById(R.id.email_signIn_edit_text);
         mPasswordEditText = findViewById(R.id.password_signIn_edit_text);
-        mRadioButton = findViewById(R.id.RG_singIn);
-
-
     }
 
 
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     public void connexion(View view) {
         String email = mEmailEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString();
-        RadioButton profile = findViewById(mRadioButton.getCheckedRadioButtonId());
 
         if (!email.isEmpty()) {
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -70,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent intentConnexion = new Intent(this, Connexion.class);
                     intentConnexion.putExtra("email" , email);
                     intentConnexion.putExtra("password" , password);
-                    intentConnexion.putExtra("profile" , profile.getText().toString());
                     startActivity(intentConnexion);
                     //signInUser( email , password, profile.getText().toString());
                 }
@@ -85,18 +80,18 @@ public class MainActivity extends AppCompatActivity {
     public void authCheck(FirebaseUser currentUser){
 
         String uID = currentUser.getUid();
-        FirebaseFirestore.getInstance().collection("users").document(uID).get()
+        FirebaseFirestore.getInstance().collection("Users").document(uID).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.getString("profile").equals("Etudiant")){
-                            Intent myIntent = new Intent(MainActivity.this , StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Intent myIntent = new Intent(MainActivity.this , MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             myIntent.putExtra("email" , documentSnapshot.getString("Email"));
                             myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
                             myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
                             startActivity(myIntent);
                         }else{
-                            Intent myIntent = new Intent(MainActivity.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Intent myIntent = new Intent(MainActivity.this , MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             myIntent.putExtra("email" , documentSnapshot.getString("Email"));
                             myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
                             myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
@@ -128,13 +123,13 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.getString("profile").equals("Etudiant")){
-                                Intent myIntent = new Intent(MainActivity.this , StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                Intent myIntent = new Intent(MessageModel.this , StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 myIntent.putExtra("email" , documentSnapshot.getString("Email"));
                                 myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
                                 myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
                                 startActivity(myIntent);
                             }else{
-                                Intent myIntent = new Intent(MainActivity.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                Intent myIntent = new Intent(MessageModel.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 myIntent.putExtra("email" , documentSnapshot.getString("Email"));
                                 myIntent.putExtra("User_Name" , documentSnapshot.getString("User_Name"));
                                 myIntent.putExtra("profile" , documentSnapshot.getString("profile"));
@@ -145,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                            Intent myIntent = new Intent(MainActivity.this , MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Toast.makeText(MessageModel.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            Intent myIntent = new Intent(MessageModel.this , MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             Log.d("dddd" , e.getMessage());
                             startActivity(myIntent);
                         }

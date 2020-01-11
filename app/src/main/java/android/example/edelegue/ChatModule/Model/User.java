@@ -1,4 +1,4 @@
-package android.example.edelegue;
+package android.example.edelegue.ChatModule.Model;
 
 public class User {
     private String id;
