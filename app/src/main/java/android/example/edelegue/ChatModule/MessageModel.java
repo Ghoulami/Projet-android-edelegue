@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.example.edelegue.ChatModule.Fragment.ChatsFragment;
 import android.example.edelegue.ChatModule.Fragment.UsersFragment;
 import android.example.edelegue.ChatModule.Model.User;
-import android.example.edelegue.Inscription;
+import android.example.edelegue.MainActivity;
 import android.example.edelegue.R;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,7 +107,7 @@ public class MessageModel extends AppCompatActivity {
             case  R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 // change this code beacuse your app will crash
-                startActivity(new Intent(MessageModel.this, Inscription.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                startActivity(new Intent(MessageModel.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 return true;
         }
 
