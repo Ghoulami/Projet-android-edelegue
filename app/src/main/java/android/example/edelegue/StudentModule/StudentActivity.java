@@ -13,12 +13,15 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -118,18 +121,20 @@ public class StudentActivity extends AppCompatActivity {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         CollectionReference reference = FirebaseFirestore.getInstance().collection("Posts");
 
-        reference.orderBy("datetime", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        reference.orderBy("currentTime", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@NonNull QuerySnapshot value,
                                 @NonNull FirebaseFirestoreException e) {
 
                 if (FirebaseAuth.getInstance().getCurrentUser() != null){
+                    mPosts.clear();
+                    Log.d("dddd" , String.valueOf(value.size()));
                     for (QueryDocumentSnapshot document : value) {
 
-                        SimpleDateFormat formater = new SimpleDateFormat("'le' dd/MM/yyyy 'à' hh:mm");
-                        String date = formater.format(document.getTimestamp("datetime").toDate());
+                        SimpleDateFormat formater = new SimpleDateFormat("'le' dd/MM/yyyy 'à' HH:mm");
+                        String date = formater.format(document.getTimestamp("currentTime").toDate());
 
-                        Post post = new Post(document.getId() , document.getString("auteur") , document.getString("body"), date , document.getString("fichier") , document.getString("objet"));
+                        Post post = new Post(document.getId() , document.getString("user_id") , document.getString("content"), date , document.getString("img_url") , document.getString("title"));
 
                         assert post != null;
                         assert firebaseUser != null;
@@ -145,6 +150,13 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
+        DocumentReference doc = FirebaseFirestore.getInstance().collection("Posts").document("6s0C7YlRtAki3WsScJgN");
+        doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Log.d("dddd" , String.valueOf(task.getResult().getString("user_id")));
+            }
+        });
     }
 
 }

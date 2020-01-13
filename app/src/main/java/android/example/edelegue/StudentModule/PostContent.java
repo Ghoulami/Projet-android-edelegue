@@ -100,9 +100,9 @@ public class PostContent extends AppCompatActivity {
 
                 if (document != null && document.exists()) {
                     SimpleDateFormat formater = new SimpleDateFormat("'le' dd/MM/yyyy 'à' hh:mm");
-                    String date = formater.format(document.getTimestamp("datetime").toDate());
+                    String date = formater.format(document.getTimestamp("currentTime").toDate());
 
-                    Post post = new Post(document.getId() , document.getString("auteur") , document.getString("body"), date , document.getString("fichier") , document.getString("objet"));
+                    Post post = new Post(document.getId() , document.getString("user_id") , document.getString("content"), date , document.getString("img_url") , document.getString("title"));
 
                     show_ObjTextView = findViewById(R.id.post_adapter_tv_title);
                     show_ObjTextView.setText("Objet : "+ post.getObjet());
