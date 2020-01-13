@@ -3,7 +3,7 @@ package android.example.edelegue.ChatModule.Model;
 public class User {
     private String id;
     private String username;
-    private String email;
+    private String Email;
     private String profile;
     private String imageURL;
     private String status;
@@ -12,7 +12,7 @@ public class User {
     public User(String id, String username, String email, String profile, String imageURL, String status, String search) {
         this.id = id;
         this.username = username;
-        this.email = email;
+        this.Email = email;
         this.profile = profile;
         this.imageURL = imageURL;
         this.status = status;
@@ -40,11 +40,11 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public String getProfile() {

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/logout"
-        android:title="Se déconnecter"
+        android:id="@+id/messages"
+        android:title="Mes messages"
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/messages"
-        android:title="Mes messages"
+        android:id="@+id/logout"
+        android:title="Se déconnecter"
         app:showAsAction="never"/>
 
 </menu>

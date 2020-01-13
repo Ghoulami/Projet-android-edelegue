@@ -12,11 +12,14 @@ import android.example.edelegue.ChatModule.Fragment.ChatsFragment;
 import android.example.edelegue.ChatModule.Fragment.UsersFragment;
 import android.example.edelegue.ChatModule.Model.User;
 import android.example.edelegue.MainActivity;
+import android.example.edelegue.ProfesorActivity;
 import android.example.edelegue.R;
+import android.example.edelegue.StudentModule.StudentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
@@ -37,34 +40,23 @@ public class MessageModel extends AppCompatActivity {
 
     FirebaseUser firebaseUser;
     DocumentReference reference ;
+    String profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-
-
-        profile_image = findViewById(R.id.profile_image);
-        username = findViewById(R.id.username);
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseFirestore.getInstance().collection("Users").document(firebaseUser.getUid());
-
 
         reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@NonNull DocumentSnapshot snapshot, @NonNull FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w("chanegListner", "Listen failed.", e);
-                    return;
-                }
 
                 if (snapshot != null && snapshot.exists()) {
                     User user = snapshot.toObject(User.class);
+                    profile = user.getProfile();
                     username.setText(user.getUsername());
                     if (user.getImageURL().equals("default")){
                         profile_image.setImageResource(R.drawable.ic_action_contact);
@@ -77,6 +69,32 @@ public class MessageModel extends AppCompatActivity {
                 }
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                status("offline");
+                // and this
+                if (profile.equals("Enseignant")){
+                    startActivity(new Intent(MessageModel.this, ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+                else{
+                    startActivity(new Intent(MessageModel.this, StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+                finish();
+            }
+        });
+
+
+        profile_image = findViewById(R.id.profile_image);
+        username = findViewById(R.id.username);
+
+
+
 
 
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -91,28 +109,6 @@ public class MessageModel extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-
-            case  R.id.logout:
-                status("offline");
-                FirebaseAuth.getInstance().signOut();
-                // change this code beacuse your app will crash
-                startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                return true;
-        }
-
-        return false;
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

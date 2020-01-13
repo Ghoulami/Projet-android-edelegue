@@ -1,9 +1,8 @@
 package android.example.edelegue;
 
 import android.content.Intent;
-import android.example.edelegue.ChatModule.MessageModel;
+import android.example.edelegue.StudentModule.StudentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.getString("profile").equals("Etudiant")){
-                            Intent myIntent = new Intent(MainActivity.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Intent myIntent = new Intent(MainActivity.this , StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(myIntent);
                         }else{
                             Intent myIntent = new Intent(MainActivity.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

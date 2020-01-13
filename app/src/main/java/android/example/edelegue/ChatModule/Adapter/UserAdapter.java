@@ -29,9 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context mContext;
     private List<User> mUsers;
     private boolean ischat;
-    private int unReaded = 0;
     private List<Chat> mChat;
-    private String userName;
 
     public UserAdapter(Context mContext, List<User> mUsers, boolean ischat){
         this.mUsers = mUsers;
