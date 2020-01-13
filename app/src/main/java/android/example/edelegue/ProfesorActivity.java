@@ -2,18 +2,14 @@ package android.example.edelegue;
 
 import android.content.Intent;
 import android.example.edelegue.ChatModule.MessageModel;
-import android.example.edelegue.ChatModule.Model.User;
 import android.example.edelegue.ui.professor_fragments.HomeFragment;
 import android.example.edelegue.ui.professor_fragments.MessagesFragment;
 import android.example.edelegue.ui.professor_fragments.PostsFragments;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,13 +20,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 
 public class ProfesorActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener , PostsFragments.OnFragmentInteractionListener, MessagesFragment.OnFragmentInteractionListener , NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,6 +40,7 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_professor_menu);
 
         //config dde la toolbare
@@ -64,13 +57,12 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
             }
         });
 
-
         //config drawer layout
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-               0,0);
+                0,0);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -81,7 +73,7 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_message, R.id.nav_myposts /*, R.id.nav_signout*/)
+                R.id.nav_home, R.id.nav_message, R.id.nav_myposts /*R.id.nav_signout*/)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -91,34 +83,12 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-
-            case  R.id.logout:
-                FirebaseAuth.getInstance().signOut();
-                // change this code beacuse your app will crash
-                startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-                return true;
-        }
-
-        return false;
-    }
-
-
     public boolean onNavigationItemSelected(@NonNull MenuItem item){
         // 4 - Handle Navigation Item Click
         int id = item.getItemId();
         switch(id){
             case R.id.nav_message:
-                startActivity(new Intent(this, MessageModel.class));
+                startActivity(new Intent(this, MessageModel.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                 break;
 
             case R.id.nav_home:
@@ -130,6 +100,14 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
                 break;
         }
         this.drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
