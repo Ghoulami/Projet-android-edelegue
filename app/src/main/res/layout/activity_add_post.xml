@@ -18,28 +18,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/add_post"
-                android:layout_width="434dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/add_post" />
+                android:text="@string/add_post"
+                android:textColor="#000000"
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/title_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:hint="@string/hint_post_title" />
 
             <EditText
-                android:id="@+id/EditMessage"
+                android:id="@+id/content_post"
                 android:layout_width="fill_parent"
-                android:layout_height="271dp"
+                android:layout_height="189dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:background="#F1E7E7"
                 android:gravity="top"
+                android:hint="Description du post"
                 android:imeOptions="actionDone"
                 android:inputType="textMultiLine|textFilter|textVisiblePassword|textNoSuggestions"
                 android:maxLength="200"
@@ -47,39 +55,47 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000">
 
-                <requestFocus />
-
             </EditText>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_file_choose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/upload_btn"
-                android:onClick="upload"/>
+
+                <Button
+                    android:id="@+id/btn_file_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="upload"
+                    android:text="@string/upload_btn" />
+
+                <TextView
+                    android:id="@+id/name_file"
+                    android:layout_width="434dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+
+                    />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/name_file"
-                android:layout_width="434dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                 />
-            </LinearLayout>
+                android:id="@+id/date_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/btn_file_send"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="50dp"
                 android:layout_gravity="center"
-                android:text="@string/send_btn"
-                android:onClick="send"/>
+                android:layout_marginTop="100dp"
+                android:layout_weight="1"
+                android:onClick="send"
+                android:text="@string/send_btn" />
         </LinearLayout>
 
     </ScrollView>
