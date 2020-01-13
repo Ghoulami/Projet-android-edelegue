@@ -5,9 +5,9 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_message">
 
-    <fragment
+    <activity
         android:id="@+id/nav_home"
-        android:name="android.example.edelegue.ui.professor_fragments.HomeFragment"
+        android:name="android.example.edelegue.ui.professor_fragments.HomeProfessor"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 

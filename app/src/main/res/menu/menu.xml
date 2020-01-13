@@ -7,9 +7,5 @@
         android:title="Se déconnecter"
         app:showAsAction="never"/>
 
-    <item
-        android:id="@+id/messages"
-        android:title="Mes messages"
-        app:showAsAction="never"/>
 
 </menu>
