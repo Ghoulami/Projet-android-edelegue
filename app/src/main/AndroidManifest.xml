@@ -43,7 +43,6 @@
         <activity android:name=".StudentModule.PostContent"
             android:parentActivityName=".StudentModule.StudentActivity">
         </activity>
-
     </application>
 
 </manifest>

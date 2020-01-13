@@ -6,10 +6,6 @@
     android:id="@+id/fragment_message"
     tools:context=".ui.professor_fragments.MessagesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
 
 </FrameLayout>
