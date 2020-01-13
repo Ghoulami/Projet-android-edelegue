@@ -2,18 +2,14 @@ package android.example.edelegue;
 
 import android.content.Intent;
 import android.example.edelegue.ChatModule.MessageModel;
-import android.example.edelegue.ChatModule.Model.User;
-import android.example.edelegue.ui.professor_fragments.HomeFragment;
+import android.example.edelegue.ui.professor_fragments.HomeProfessor;
 import android.example.edelegue.ui.professor_fragments.MessagesFragment;
 import android.example.edelegue.ui.professor_fragments.PostsFragments;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,10 +25,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 
-public class ProfesorActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener , PostsFragments.OnFragmentInteractionListener, MessagesFragment.OnFragmentInteractionListener , NavigationView.OnNavigationItemSelectedListener {
+public class ProfesorActivity extends AppCompatActivity implements  PostsFragments.OnFragmentInteractionListener, MessagesFragment.OnFragmentInteractionListener , NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
@@ -122,7 +116,7 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
                 break;
 
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home,new HomeFragment()).commit();
+                startActivity(new Intent(this, HomeProfessor.class));
                 break;
 
             case R.id.nav_myposts:
