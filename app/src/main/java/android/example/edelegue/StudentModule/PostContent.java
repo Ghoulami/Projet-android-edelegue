@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -53,20 +54,22 @@ public class PostContent extends AppCompatActivity {
     public TextView show_auteur;
     public TextView show_date;
     public TextView show_fils;
-    String fileName;
+    String fileName , file_uri;
+    MaterialButton downloadFile;
 
     CircleImageView profile_image;
     TextView username;
-
     FirebaseUser firebaseUser;
-    FirebaseStorage mfirebaseStrorage;
-    StorageReference refStorge;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_content);
+
+        downloadFile = findViewById(R.id.BT_DOWNLOAD);
+
         intent = getIntent();
         postId = intent.getStringExtra("post");
 
@@ -116,7 +119,7 @@ public class PostContent extends AppCompatActivity {
                     SimpleDateFormat formater = new SimpleDateFormat("'le' dd/MM/yyyy 'à' hh:mm");
                     String date = formater.format(document.getTimestamp("currentTime").toDate());
 
-                    Post post = new Post(document.getId() , document.getString("user_id") , document.getString("content"), date , document.getString("img_url") , document.getString("title"));
+                    Post post = new Post(document.getId() , document.getString("user_id") , document.getString("content"), date , document.getString("img_url") , document.getString("title"), document.getString("file_name"));
 
                     show_ObjTextView = findViewById(R.id.post_adapter_tv_title);
                     show_ObjTextView.setText("Objet : "+ post.getObjet());
@@ -131,7 +134,15 @@ public class PostContent extends AppCompatActivity {
                     show_fils.setText(post.getFichier());
 
 
-                    fileName =post.getFichier();
+                    file_uri = post.getFichier();
+
+                    Log.d("ddd" , file_uri);
+
+                    String fileName = post.getFile_name();
+                    String[] arrOfStr = fileName.split("\\.");
+
+
+                    Log.d("ddd" , String.valueOf(fileName.split("\\.").length));
 
                     DocumentReference referenceDoc = FirebaseFirestore.getInstance().collection("Users").document(post.getAuteur());
                     referenceDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -149,6 +160,20 @@ public class PostContent extends AppCompatActivity {
             }
         });
 
+        downloadFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String[] arrOfStr = fileName.split("\\.");
+
+                String name = arrOfStr[0];
+                String exten = arrOfStr[1];
+
+                Log.d("ddd" , file_uri);
+
+                downloadFile(PostContent.this, name , "."+exten, DIRECTORY_DOWNLOADS, file_uri);
+            }
+        });
     }
 
     @Override
@@ -172,12 +197,9 @@ public class PostContent extends AppCompatActivity {
         return false;
     }
 
-    public void downloadPost(View view) {
-        downloadFile(PostContent.this,fileName.split(".")[0],"."+fileName.split(".")[1],DIRECTORY_DOWNLOADS,fileName);
-    }
 
     public void downloadFile(Context context, String fileName, String fileExtension, String destinationDirectory, String url) {
-
+        Log.d("dddd" , file_uri);
         DownloadManager downloadmanager = (DownloadManager) context.
                 getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse(url);

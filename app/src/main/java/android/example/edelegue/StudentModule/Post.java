@@ -7,17 +7,27 @@ public class Post {
     private String datetime;
     private String fichier;
     private String objet;
+    private String file_name;
 
-    public Post(String id, String auteur, String body, String datetime, String fichier, String objet) {
+    public Post(String id, String auteur, String body, String datetime, String fichier, String objet,String file_name) {
         this.id = id;
         this.auteur = auteur;
         this.body = body;
         this.datetime = datetime;
         this.fichier = fichier;
         this.objet = objet;
+        this.file_name = file_name;
     }
 
     public Post() {
+    }
+
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 
     public String getId() {
