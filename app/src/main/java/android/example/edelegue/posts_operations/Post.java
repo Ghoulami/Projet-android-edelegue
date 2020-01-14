@@ -6,16 +6,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Calendar;
 public class Post {
-    String title , content , img_url , user_id;
+    String title , content , img_url , user_id , file_name;
     Timestamp currentTime ;
 
 
-    public Post(String title, String content, String img_url, String user_id, Timestamp currentTime) {
+    public Post(String title, String content, String img_url, String user_id, Timestamp currentTime , String file_name) {
         this.title = title;
         this.content = content;
         this.img_url = img_url;
         this.user_id = user_id;
         this.currentTime = currentTime;
+        this.file_name = file_name;
     }
 
     public void setCurrentTime(Timestamp currentTime) {
@@ -27,6 +28,14 @@ public class Post {
 
     public Post(){
 
+    }
+
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 
     public String getTitle() {

@@ -5,21 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.example.edelegue.ChatModule.MessageModel;
 import android.example.edelegue.ChatModule.Model.User;
 import android.example.edelegue.MainActivity;
 import android.example.edelegue.ProfesorActivity;
 import android.example.edelegue.R;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,10 +33,15 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class PostContent extends AppCompatActivity {
     Intent intent;
@@ -43,11 +53,15 @@ public class PostContent extends AppCompatActivity {
     public TextView show_auteur;
     public TextView show_date;
     public TextView show_fils;
+    String fileName;
 
     CircleImageView profile_image;
     TextView username;
 
     FirebaseUser firebaseUser;
+    FirebaseStorage mfirebaseStrorage;
+    StorageReference refStorge;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +130,9 @@ public class PostContent extends AppCompatActivity {
                     show_fils = findViewById(R.id.post_adapter_tv_file);
                     show_fils.setText(post.getFichier());
 
+
+                    fileName =post.getFichier();
+
                     DocumentReference referenceDoc = FirebaseFirestore.getInstance().collection("Users").document(post.getAuteur());
                     referenceDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -154,4 +171,22 @@ public class PostContent extends AppCompatActivity {
 
         return false;
     }
+
+    public void downloadPost(View view) {
+        downloadFile(PostContent.this,fileName.split(".")[0],"."+fileName.split(".")[1],DIRECTORY_DOWNLOADS,fileName);
+    }
+
+    public void downloadFile(Context context, String fileName, String fileExtension, String destinationDirectory, String url) {
+
+        DownloadManager downloadmanager = (DownloadManager) context.
+                getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context, destinationDirectory, fileName + fileExtension);
+
+        downloadmanager.enqueue(request);
+    }
+
 }

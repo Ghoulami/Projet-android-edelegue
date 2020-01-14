@@ -58,6 +58,7 @@ public class Add_post extends AppCompatActivity {
     FirebaseUser curentUser;
     FirebaseAuth mAuth;
     String Uri_file;
+    String file_name;
 
 
     @Override
@@ -120,6 +121,7 @@ public class Add_post extends AppCompatActivity {
             returnCursor.moveToFirst();
 
             name_file.setText(returnCursor.getString(nameIndex));
+            file_name = returnCursor.getString(nameIndex);
 
             Toast.makeText(getApplicationContext(), "le fichier est importé avec succes", Toast.LENGTH_LONG).show();
 
@@ -150,7 +152,7 @@ public class Add_post extends AppCompatActivity {
     public void send(View view) {
 
 
-        Post post1 = new Post(title.getText().toString(),content.getText().toString(),Uri_file,curentUser.getUid(),Timestamp.now());
+        Post post1 = new Post(title.getText().toString(),content.getText().toString(),Uri_file,curentUser.getUid(),Timestamp.now() , file_name);
         db.collection("Posts").document().set(post1)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

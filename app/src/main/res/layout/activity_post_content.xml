@@ -110,9 +110,22 @@
                 android:text="File :"
                 android:textColor="#000000"
                 android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_adapter_tv_description" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/BT_DOWNLOAD"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="40dp"
+                android:layout_marginTop="90dp"
+                android:gravity="center"
+                android:onClick="downloadPost"
+                android:text="Telecharger le fichier"
+                app:layout_constraintTop_toBottomOf="@+id/post_adapter_tv_file" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
