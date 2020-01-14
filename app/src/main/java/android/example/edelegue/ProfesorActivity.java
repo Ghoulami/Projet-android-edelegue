@@ -2,6 +2,7 @@ package android.example.edelegue;
 
 import android.content.Intent;
 import android.example.edelegue.ChatModule.MessageModel;
+import android.example.edelegue.posts_operations.Add_post;
 import android.example.edelegue.ui.professor_fragments.HomeFragment;
 import android.example.edelegue.ui.professor_fragments.MessagesFragment;
 import android.example.edelegue.ui.professor_fragments.PostsFragments;
@@ -48,15 +49,7 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         //config drawer layout
         drawer = findViewById(R.id.drawer_layout);
@@ -147,5 +140,10 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
     protected void onStop() {
         super.onStop();
         finish();
+    }
+
+    public void ouvrir_add_post(View view) {
+        Intent myIntent = new Intent(getBaseContext(),Add_post.class);
+        startActivity(myIntent);
     }
 }

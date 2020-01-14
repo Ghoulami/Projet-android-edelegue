@@ -6,4 +6,11 @@
     android:id="@+id/fragment_post"
     tools:context=".ui.professor_fragments.PostsFragments">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/prof_posts_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_marginTop="10dp"/>
+
 </FrameLayout>

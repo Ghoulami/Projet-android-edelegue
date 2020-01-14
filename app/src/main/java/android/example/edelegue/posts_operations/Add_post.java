@@ -1,12 +1,17 @@
 package android.example.edelegue.posts_operations;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.example.edelegue.R;
+import android.example.edelegue.StudentModule.PostContent;
+import android.example.edelegue.StudentModule.StudentActivity;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,6 +70,16 @@ public class Add_post extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
+        // my_child_toolbar is defined in the layout file
+        Toolbar myChildToolbar =
+                (Toolbar) findViewById(R.id.my_child_toolbar);
+        setSupportActionBar(myChildToolbar);
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
         //intialise the frebsare instance
         folder = FirebaseStorage.getInstance().getReference().child("imageFolder");
@@ -126,7 +141,7 @@ public class Add_post extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "le fichier est importé avec succes", Toast.LENGTH_LONG).show();
 
             final Uri imageurl = data.getData();
-            final StorageReference fileimage = folder.child("image n :"+imageurl.getLastPathSegment());
+            final StorageReference fileimage = folder.child(file_name);
             fileimage.putFile(imageurl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
