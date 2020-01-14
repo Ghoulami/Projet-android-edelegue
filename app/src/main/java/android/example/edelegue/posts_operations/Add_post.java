@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.example.edelegue.ProfesorActivity;
 import android.example.edelegue.R;
 import android.example.edelegue.StudentModule.PostContent;
 import android.example.edelegue.StudentModule.StudentActivity;
@@ -160,12 +161,12 @@ public class Add_post extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "something went wrong", Toast.LENGTH_LONG).show();
 
         }
+
     }
 
 
 
     public void send(View view) {
-
 
         Post post1 = new Post(title.getText().toString(),content.getText().toString(),Uri_file,curentUser.getUid(),Timestamp.now() , file_name);
         db.collection("Posts").document().set(post1)
@@ -180,5 +181,7 @@ public class Add_post extends AppCompatActivity {
                         }
                     }
                 });
+
+        startActivity(new Intent(Add_post.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }
