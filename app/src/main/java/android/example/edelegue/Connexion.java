@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.example.edelegue.ChatModule.MessageModel;
 import android.example.edelegue.StudentModule.StudentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -52,20 +50,17 @@ public class Connexion extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             uID = mAuth.getCurrentUser().getUid();
-                            Toast.makeText(Connexion.this, uID, Toast.LENGTH_LONG).show();
                             FirebaseFirestore.getInstance().collection("Users").document(uID).get()
                                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                         @Override
                                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                                             if (documentSnapshot.getString("profile").equals("Etudiant")){
                                                 Intent myIntent = new Intent(Connexion.this , StudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                Toast.makeText(Connexion.this,  documentSnapshot.getString("User_Name"), Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                                 Toast.makeText(Connexion.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
                                                 startActivity(myIntent);
                                             }else{
                                                 Intent myIntent = new Intent(Connexion.this , ProfesorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                Toast.makeText(Connexion.this,  documentSnapshot.getString("User_Name"), Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                                 Toast.makeText(Connexion.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
                                                 startActivity(myIntent);
@@ -77,7 +72,6 @@ public class Connexion extends AppCompatActivity {
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(Connexion.this, e.getMessage(), Toast.LENGTH_LONG).show();
                                             Intent myIntent = new Intent(Connexion.this , MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            Log.d("dddd" , e.getMessage());
                                             startActivity(myIntent);
                                         }
                                     });

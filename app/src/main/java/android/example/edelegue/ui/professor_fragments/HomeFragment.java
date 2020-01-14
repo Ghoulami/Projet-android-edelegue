@@ -70,7 +70,6 @@ public class HomeFragment extends Fragment {
 
                 if (FirebaseAuth.getInstance().getCurrentUser() != null){
                     mPosts.clear();
-                    Log.d("dddd" , String.valueOf(value.size()));
                     for (QueryDocumentSnapshot document : value) {
 
                         SimpleDateFormat formater = new SimpleDateFormat("'le' dd/MM/yyyy 'à' HH:mm");
@@ -92,13 +91,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        DocumentReference doc = FirebaseFirestore.getInstance().collection("Posts").document("6s0C7YlRtAki3WsScJgN");
-        doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                Log.d("dddd" , String.valueOf(task.getResult().getString("user_id")));
-            }
-        });
     }
 
     public interface OnFragmentInteractionListener {

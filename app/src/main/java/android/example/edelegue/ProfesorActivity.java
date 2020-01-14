@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,10 +23,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+
 
 public class ProfesorActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener , PostsFragments.OnFragmentInteractionListener, MessagesFragment.OnFragmentInteractionListener , NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,6 +39,10 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
     NavController navController;
     ActionBarDrawerToggle toggle;
 
+    TextView emailField , nameField;
+    FirebaseUser firebaseUser;
+    DocumentReference reference ;
+
     public void onFragmentInteraction(Uri uri) {
 
     }
@@ -42,14 +50,11 @@ public class ProfesorActivity extends AppCompatActivity implements HomeFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_professor_menu);
 
         //config dde la toolbare
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         //config drawer layout
         drawer = findViewById(R.id.drawer_layout);
