@@ -123,6 +123,7 @@
                 android:layout_margin="40dp"
                 android:layout_marginTop="90dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="Telecharger le fichier"
                 app:layout_constraintTop_toBottomOf="@+id/post_adapter_tv_file" />
 

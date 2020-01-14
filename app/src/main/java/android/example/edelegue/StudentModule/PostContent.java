@@ -54,7 +54,7 @@ public class PostContent extends AppCompatActivity {
     public TextView show_auteur;
     public TextView show_date;
     public TextView show_fils;
-    String fileName , file_uri;
+    public String fileName , file_uri;
     MaterialButton downloadFile;
 
     CircleImageView profile_image;
@@ -130,19 +130,32 @@ public class PostContent extends AppCompatActivity {
                     show_date = findViewById(R.id.post_adapter_tv_date);
                     show_date.setText(post.getDatetime());
 
-                    show_fils = findViewById(R.id.post_adapter_tv_file);
-                    show_fils.setText(post.getFichier());
+                    if (post.getFichier() != null){
+                        downloadFile.setVisibility(View.VISIBLE);
+                        show_fils = findViewById(R.id.post_adapter_tv_file);
+                        show_fils.setText(post.getFichier());
+
+                        file_uri = post.getFichier();
+                        fileName = post.getFile_name();
+                        Log.d("ddd" , fileName);
+                    }
 
 
-                    file_uri = post.getFichier();
+                    downloadFile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                    Log.d("ddd" , file_uri);
+                            String[] arrOfStr = fileName.split("\\.");
+                            Log.d("ddd" , fileName);
+                            String name = arrOfStr[0];
+                            String exten = arrOfStr[1];
 
-                    String fileName = post.getFile_name();
-                    String[] arrOfStr = fileName.split("\\.");
+                            Log.d("ddd" , file_uri);
 
+                            downloadFile(PostContent.this, name , "."+exten, DIRECTORY_DOWNLOADS, file_uri);
+                        }
+                    });
 
-                    Log.d("ddd" , String.valueOf(fileName.split("\\.").length));
 
                     DocumentReference referenceDoc = FirebaseFirestore.getInstance().collection("Users").document(post.getAuteur());
                     referenceDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -160,20 +173,8 @@ public class PostContent extends AppCompatActivity {
             }
         });
 
-        downloadFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String[] arrOfStr = fileName.split("\\.");
 
-                String name = arrOfStr[0];
-                String exten = arrOfStr[1];
-
-                Log.d("ddd" , file_uri);
-
-                downloadFile(PostContent.this, name , "."+exten, DIRECTORY_DOWNLOADS, file_uri);
-            }
-        });
     }
 
     @Override
