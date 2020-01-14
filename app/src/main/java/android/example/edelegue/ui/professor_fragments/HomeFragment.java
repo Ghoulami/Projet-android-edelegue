@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
                         SimpleDateFormat formater = new SimpleDateFormat("'le' dd/MM/yyyy 'à' HH:mm");
                         String date = formater.format(document.getTimestamp("currentTime").toDate());
 
-                        Post post = new Post(document.getId() , document.getString("user_id") , document.getString("content"), date , document.getString("img_url") , document.getString("title"));
+                        Post post = new Post(document.getId() , document.getString("user_id") , document.getString("content"), date , document.getString("img_url") , document.getString("title") , document.getString("file_name"));
 
                         assert post != null;
                         assert firebaseUser != null;

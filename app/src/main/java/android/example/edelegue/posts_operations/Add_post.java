@@ -126,7 +126,7 @@ public class Add_post extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "le fichier est importé avec succes", Toast.LENGTH_LONG).show();
 
             final Uri imageurl = data.getData();
-            final StorageReference fileimage = folder.child("image n :"+imageurl.getLastPathSegment());
+            final StorageReference fileimage = folder.child(file_name);
             fileimage.putFile(imageurl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
