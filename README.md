@@ -1,12 +1,12 @@
 # Projet-android-edelegue
-1) clone le projet ou bient telecherger le fichier ZIP
-2) ouvrir le proj dans android studio 
-3) verifier la version de gradale et telecharger les dependences 
-4) run l'application dans votre prephirique ou dans l'umilateur dans Android studio
-5) tester la parti prof avec le compte :
-    email : proftest@gmail.com
+1) Clone le projet ou bien télécharger le fichier ZIP
+2) Ouvrir le projet dans Android studio
+3) Vérifier la version de gradale et télécharger les dépendances
+4) Exécuter l'application dans votre périphérique ou dans l'émulateur dans Android studio
+5) Tester la partie prof avec le compte : 
+    email : proftest@gmail.com 
     password : 123456789
-6) tester la parti prof avec le compte :
-    email : etudiantest@gmail.com
+6) Tester la partie prof avec le compte : 
+    email : etudiantest@gmail.com 
     password : 123456789
-   
+
